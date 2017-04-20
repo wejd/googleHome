@@ -1,17 +1,19 @@
 {
-  "name": "allplay",
-  "version": "1.0.0",
-  "description": "this is a webhook server ",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.17.1",
-    "express": "^4.15.2",
-    "request": "^2.81.0",
-    "request-promise": "^4.2.0"
-  }
+    "name": "allplay",
+    "version": "1.0.0",
+    "description": "this is a webhook server ",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.17.1",
+        "express": "^4.15.2",
+        "request": "^2.81.0",
+        "request-promise": "^4.2.0"
+    }
+
 }
