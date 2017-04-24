@@ -45,8 +45,9 @@ restService.post('/webhook', function(req, res) {
             break;
         case 'play':
 
-            return request.post({ url: 'http://vps341573.ovh.net:5050/playnext', form: { key: '' } },
+            return request.post({ url: 'http://vps341573.ovh.net:5050/playnext', form: { key: '' } }).then(
                 function(body) {
+                    console.log(body)
                     var obj = JSON.parse(body);
                     if (obj.status == "no") {
 
@@ -63,9 +64,7 @@ restService.post('/webhook', function(req, res) {
 
                         });
                     }
-                }
-
-            );
+                })
             break;
     }
 })
