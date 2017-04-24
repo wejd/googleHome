@@ -43,15 +43,32 @@ restService.post('/webhook', function(req, res) {
 
 
             break;
+        case 'play':
 
+            return request.post({ url: 'http://vps341573.ovh.net:5050/playnext', form: { key: '' } },
+                function(body) {
+                    var obj = JSON.parse(body);
+                    if (obj.status == "no") {
 
+                        return res.json({
+                            speech: 'I have no allplay device selected. would you like to launch discovery ? ',
+                            source: 'webhook-echo-one',
 
+                        });
+
+                    } else {
+                        return res.json({
+                            speech: 'OK ',
+                            source: 'webhook-echo-one',
+
+                        });
+                    }
+                }
+
+            );
+            break;
     }
-
-
-
-});
-
+})
 
 restService.listen((process.env.PORT || 9090), function() {
     console.log("Server up and listening");
