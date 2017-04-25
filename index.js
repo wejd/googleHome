@@ -112,6 +112,78 @@ restService.post('/webhook', function(req, res) {
                     }
                 })
             break;
+        case 'increaseVolume':
+            return request.post({ url: 'http://vps341573.ovh.net:5050/incrvolume', form: { key: '' } }).then(
+                function(body) {
+                    console.log(body)
+                    var obj = JSON.parse(body);
+                    if (obj.status == "no") {
+
+                        return res.json({
+                            speech: 'I have no allplay device selected. would you like to launch discovery ? ',
+                            source: 'webhook-echo-one',
+
+                        });
+
+                    } else {
+                        return res.json({
+                            speech: 'OK ',
+                            source: 'webhook-echo-one',
+
+                        });
+                    }
+                })
+            break;
+        case 'reduceVolume':
+
+            return request.post({ url: 'http://vps341573.ovh.net:5050/decrevolume', form: { key: '' } }).then(
+                function(body) {
+                    console.log(body)
+                    var obj = JSON.parse(body);
+                    if (obj.status == "no") {
+
+                        return res.json({
+                            speech: 'I have no allplay device selected. would you like to launch discovery ? ',
+                            source: 'webhook-echo-one',
+
+                        });
+
+                    } else {
+                        return res.json({
+                            speech: 'OK ',
+                            source: 'webhook-echo-one',
+
+                        });
+                    }
+                })
+            break;
+
+
+
+
+        case 'link':
+
+            return request.post({ url: 'http://vps341573.ovh.net:5050', form: { key: req.body.result.parameters.any } }).then(
+                function(body) {
+                    console.log(body)
+                    var obj = JSON.parse(body);
+                    if (obj == "found") {
+
+                        return res.json({
+                            speech: req.body.result.parameters.any + ' has been selected',
+                            source: 'webhook-echo-one',
+
+                        });
+
+                    } else {
+                        return res.json({
+                            speech: 'OK ',
+                            source: 'I was unable to select ' + req.body.result.parameters.any + ' . Please try again later'
+
+                        });
+                    }
+                })
+            break;
     }
 })
 
