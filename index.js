@@ -166,8 +166,8 @@ restService.post('/webhook', function(req, res) {
             return request.post({ url: 'http://vps341573.ovh.net:5050', form: { key: req.body.result.parameters.any } }).then(
                 function(body) {
                     console.log(body)
-                    var obj = JSON.parse(body);
-                    if (obj == "found") {
+
+                    if (body == "found") {
 
                         return res.json({
                             speech: req.body.result.parameters.any + ' has been selected',
