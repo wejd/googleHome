@@ -184,6 +184,63 @@ restService.post('/webhook', function(req, res) {
                     }
                 })
             break;
+        case 'yes':
+            if (req.body.result.contexts.name = "search") {
+
+                return request.get({ url: 'http://vps341573.ovh.net:5050', json: true }).then(function(result) {
+                    if (result) {
+
+                        return res.json({
+                            speech: 'You have  ' + result.list.length + ' allplay device available, ' + result.list + '. Do you want to select it! ',
+                            source: 'webhook-echo-one',
+
+                        });
+
+
+
+
+                    } else {
+
+                        return res.json({
+                            speech: 'No allplay device have been selected!',
+                            source: 'webhook-echo-one',
+
+                        });
+
+                    }
+
+
+
+                })
+
+            }
+            /*        if (req.body.result.contexts.name = "link") {
+
+                        return request.post({ url: 'http://vps341573.ovh.net:5050', form: { key: req.body.result.parameters.any } }).then(
+                            function(body) {
+                                console.log(body)
+
+                                if (body == "found") {
+
+                                    return res.json({
+                                        speech: req.body.result.parameters.any + ' has been selected',
+                                        source: 'webhook-echo-one',
+
+                                    });
+
+                                } else {
+                                    return res.json({
+                                        speech: 'I was unable to select ' + req.body.result.parameters.any + ' . Please try again later',
+                                        source: 'webhook-echo-one',
+
+                                    });
+                                }
+                            })
+                        break;
+
+                    }*/
+
+            break;
     }
 })
 
