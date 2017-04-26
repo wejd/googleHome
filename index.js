@@ -52,7 +52,7 @@ restService.post('/webhook', function(req, res) {
                             } else {
 
                                 return res.json({
-                                    speech: 'You have  ' + result.list.length + ' allplay device available, ' + nameSpeakerconnected + '.Do you want to select it ',
+                                    speech: 'You have  ' + result.list.length + ' allplay device available, ' + speakerListString + '.Do you want to select it ',
                                     source: 'webhook-echo-one',
 
                                 });
