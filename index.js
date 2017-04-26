@@ -34,7 +34,7 @@ restService.post('/webhook', function(req, res) {
 
                             }
                         }
-                        if (result.list.length = 0) {
+                        if (result.list.length == 0) {
                             return res.json({
                                 speech: 'No allPlay device have been discovered',
                                 source: 'webhook-echo-one',
@@ -42,7 +42,7 @@ restService.post('/webhook', function(req, res) {
                             });
 
                         }
-                        if (result.list.length = 1) {
+                        if (result.list.length == 1) {
                             if (nameSpeakerconnected) {
                                 return res.json({
                                     speech: 'You have  ' + result.list.length + ' allplay device available, ' + nameSpeakerconnected + '.and it is already selected! ',
