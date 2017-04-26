@@ -333,7 +333,7 @@ restService.post('/webhook', function(req, res) {
                                 });
                             }
                         })
-                }) break;
+                })
 
             }
 
