@@ -232,7 +232,7 @@ restService.post('/webhook', function(req, res) {
                 })
             break;
         case 'yes':
-            console.log('*****', req.body.result.contexts.name)
+            console.log('*****', req.body.result)
             if (req.body.result.contexts.name == "search") {
                 request.get({ url: 'http://vps341573.ovh.net:5050/getConnectedDevice', json: true }).then(function(nameSpeakerconnected) {
                     return request.get({ url: 'http://vps341573.ovh.net:5050', json: true }).then(function(result) {
