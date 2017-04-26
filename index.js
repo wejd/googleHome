@@ -232,7 +232,8 @@ restService.post('/webhook', function(req, res) {
                 })
             break;
         case 'yes':
-            if (req.body.result.contexts.name = "search") {
+            console.log('*****', req.body.result.contexts.name)
+            if (req.body.result.contexts.name == "search") {
                 request.get({ url: 'http://vps341573.ovh.net:5050/getConnectedDevice', json: true }).then(function(nameSpeakerconnected) {
                     return request.get({ url: 'http://vps341573.ovh.net:5050', json: true }).then(function(result) {
                         if (result) {
@@ -307,7 +308,7 @@ restService.post('/webhook', function(req, res) {
 
                 })
             }
-            if (req.body.result.contexts.name = "link") {
+            if (req.body.result.contexts.name == "link") {
 
                 return request.post({ url: 'http://vps341573.ovh.net:5050', form: { key: req.body.result.parameters.any } }).then(
                     function(body) {
