@@ -336,30 +336,78 @@ restService.post('/webhook', function(req, res) {
                 })
 
             } else {
-                request.get({ url: 'http://vps341573.ovh.net:5050', json: true }).then(function(result) {
-                    return request.post({
-                        url: 'http://vps341573.ovh.net:5050',
-                        form: { key: result.list[0] }
-                    }).then(
-                        function(body) {
-                            console.log(body)
+                request.get({ url: 'http://vps341573.ovh.net:5050/getConnectedDevice', json: true }).then(function(nameSpeakerconnected) {
+                    return request.get({ url: 'http://vps341573.ovh.net:5050', json: true }).then(function(result) {
+                        if (result) {
+                            var speakerListString = ''
+                            for (i = 0; i < result.list.length; i++) {
 
-                            if (body == "found") {
+                                if (i == 0) {
 
+                                    speakerListString = result.list[i]
+                                }
+                                if (i > 0) {
+                                    if (i == result.list.length - 1) {
+                                        speakerListString = speakerListString + ' and ' + result.list[i]
+                                    } else {
+                                        speakerListString = speakerListString + ',' + result.list[i]
+                                    }
+
+                                }
+                            }
+                            if (result.list.length = 0) {
                                 return res.json({
-                                    speech: result.list[0] + ' has been selected',
+                                    speech: 'No allPlay device have been discovered',
                                     source: 'webhook-echo-one',
 
                                 });
+
+                            }
+                            if (result.list.length = 1) {
+                                if (nameSpeakerconnected) {
+                                    return res.json({
+                                        speech: 'You have  ' + result.list.length + ' allplay device available, ' + nameSpeakerconnected + '.and it is already selected! ',
+                                        source: 'webhook-echo-one',
+
+                                    });
+                                } else {
+
+                                    return res.json({
+                                        speech: 'You have  ' + result.list.length + ' allplay device available, ' + nameSpeakerconnected + '.Do you want to select it ',
+                                        source: 'webhook-echo-one',
+
+                                    });
+
+                                }
+
 
                             } else {
                                 return res.json({
-                                    speech: 'I was unable to select ' + result.list[0] + ' . Please try again later',
+                                    speech: 'You have  ' + result.list.length + ' allplay device available, ' + speakerListString + '. Please choose one! ',
                                     source: 'webhook-echo-one',
 
                                 });
+
                             }
-                        })
+
+
+
+
+
+                        } else {
+
+                            return res.json({
+                                speech: 'No allplay device have been selected!',
+                                source: 'webhook-echo-one',
+
+                            });
+
+                        }
+
+
+
+                    })
+
                 })
 
 
