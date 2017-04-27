@@ -379,6 +379,7 @@ restService.post('/webhook', function(req, res) {
                                     return res.json({
                                         speech: 'You have  ' + result.list.length + ' allplay device available, ' + speakerListString + '.Do you want to select it ',
                                         source: 'webhook-echo-one',
+                                        contextOut: [{ name: 'link' }]
 
                                     });
 
