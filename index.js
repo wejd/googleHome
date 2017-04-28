@@ -210,7 +210,7 @@ restService.post('/webhook', function(req, res) {
 
         case 'link':
 
-            return request.post({ url: 'http://vps341573.ovh.net:5050', form: { key: req.body.result.parameters.any } }).then(
+            return request.post({ url: 'http://vps341573.ovh.net:5050/pause', form: { key: req.body.result.parameters.any } }).then(
                 function(body) {
                     console.log(body)
 
@@ -225,6 +225,28 @@ restService.post('/webhook', function(req, res) {
                     } else {
                         return res.json({
                             speech: 'I was unable to select ' + req.body.result.parameters.any + ' . Please try again later',
+                            source: 'webhook-echo-one',
+
+                        });
+                    }
+                })
+            break;
+        case 'pause':
+            return request.post({ url: 'http://vps341573.ovh.net:5050/pause', form: { key: '' } }).then(
+                function(body) {
+                    console.log(body)
+                    var obj = JSON.parse(body);
+                    if (obj.status == "no") {
+
+                        return res.json({
+                            speech: 'I have no allplay device selected. would you like to launch discovery ? ',
+                            source: 'webhook-echo-one',
+
+                        });
+
+                    } else {
+                        return res.json({
+                            speech: 'OK ',
                             source: 'webhook-echo-one',
 
                         });
