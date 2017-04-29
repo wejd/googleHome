@@ -210,7 +210,7 @@ restService.post('/webhook', function(req, res) {
 
         case 'link':
 
-            return request.post({ url: 'http://vps341573.ovh.net:5050/pause', form: { key: req.body.result.parameters.any } }).then(
+            return request.post({ url: 'http://vps341573.ovh.net:5050/', form: { key: req.body.result.parameters.any } }).then(
                 function(body) {
                     console.log(body)
 
@@ -334,31 +334,27 @@ restService.post('/webhook', function(req, res) {
                 })
             }
             if (req.body.result.contexts[0].name == "link" || req.body.result.contexts[1].name == "link") {
-                request.get({ url: 'http://vps341573.ovh.net:5050', json: true }).then(function(result) {
-                    return request.post({
-                        url: 'http://vps341573.ovh.net:5050',
-                        form: { key: result.list[0] }
-                    }).then(
-                        function(body) {
-                            console.log(body)
 
-                            if (body == "found") {
+                return request.post({ url: 'http://vps341573.ovh.net:5050/', form: { key: req.body.result.parameters.any } }).then(
+                    function(body) {
+                        console.log(body)
 
-                                return res.json({
-                                    speech: result.list[0] + ' has been selected',
-                                    source: 'webhook-echo-one',
+                        if (body == "found") {
 
-                                });
+                            return res.json({
+                                speech: req.body.result.parameters.any + ' has been selected',
+                                source: 'webhook-echo-one',
 
-                            } else {
-                                return res.json({
-                                    speech: 'I was unable to select ' + result.list[0] + ' . Please try again later',
-                                    source: 'webhook-echo-one',
+                            });
 
-                                });
-                            }
-                        })
-                })
+                        } else {
+                            return res.json({
+                                speech: 'I was unable to select ' + req.body.result.parameters.any + ' . Please try again later',
+                                source: 'webhook-echo-one',
+
+                            });
+                        }
+                    })
 
             } else {
 
