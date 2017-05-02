@@ -113,6 +113,29 @@ restService.post('/webhook', function(req, res) {
                     }
                 })
             break;
+        case 'which':
+
+            return request.post({ url: 'http://vps341573.ovh.net:5050/getConnectedDevice', form: { key: '' } }).then(
+                function(body) {
+                    console.log(body)
+
+                    if (!body) {
+
+                        return res.json({
+                            speech: 'No allplay device have been selected!',
+                            source: 'webhook-echo-one',
+
+                        });
+
+                    } else {
+                        return res.json({
+                            speech: 'The device ' + body + ' is selected',
+                            source: 'webhook-echo-one',
+
+                        });
+                    }
+                })
+            break;
         case 'playNext':
 
             return request.post({ url: 'http://vps341573.ovh.net:5050/playnext', form: { key: '' } }).then(
