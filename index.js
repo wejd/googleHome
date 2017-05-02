@@ -273,7 +273,7 @@ restService.post('/webhook', function(req, res) {
 
                     } else {
                         return res.json({
-                            speech: 'The device ' + body + ' is selected',
+                            speech: ' device ' + body + ' is selected',
                             source: 'webhook-echo-one',
 
                         });
