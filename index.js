@@ -260,12 +260,12 @@ restService.post('/webhook', function(req, res) {
         case 'anyone':
 
             return request.post({ url: 'http://vps341573.ovh.net:5050/linktoanyone', form: { key: 'anyone' } }).then(
-                function(err, resu, body) {
+                function(body) {
                     console.log(err)
                     console.log(resu)
                     console.log(body)
 
-                    if (!body) {
+                    if (body == 'error') {
 
                         return res.json({
                             speech: 'No allplay device have been selected!',
