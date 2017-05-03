@@ -486,6 +486,15 @@ restService.post('/webhook', function(req, res) {
             }
 
             break;
+
+        case 'no':
+            return res.json({
+                speech: '',
+                source: 'webhook-echo-one',
+
+            });
+            break;
+
     }
 })
 
