@@ -259,11 +259,12 @@ restService.post('/webhook', function(req, res) {
             break;
         case 'increaseVolumeBy':
 
-            return request.post({ url: 'http://vps341573.ovh.net:5050/increasevolume', form: { key: false, nb: req.body.result.parameters.number } }).then(
+            return request.post({ url: 'http://vps341573.ovh.net:5050/increasevolume', form: { nb: req.body.result.parameters.number } }).then(
                 function(body) {
                     console.log(body)
 
-                    if (body == "ok") {
+                    var obj = JSON.parse(body);
+                    if (obj.status == "ok") {
 
                         return res.json({
                             speech: 'ok',
@@ -282,11 +283,11 @@ restService.post('/webhook', function(req, res) {
             break;
         case 'decreaseVolumeBy':
 
-            return request.post({ url: 'http://vps341573.ovh.net:5050/decreasevolume', form: { key: false, nb: req.body.result.parameters.number } }).then(
+            return request.post({ url: 'http://vps341573.ovh.net:5050/decreasevolume', form: { nb: req.body.result.parameters.number } }).then(
                 function(body) {
                     console.log(body)
-
-                    if (body == "ok") {
+                    var obj = JSON.parse(body);
+                    if (obj.status == "ok") {
 
                         return res.json({
                             speech: 'ok',
