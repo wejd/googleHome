@@ -119,7 +119,7 @@ restService.post('/webhook', function(req, res) {
                 function(body) {
                     console.log(body)
 
-                    if (body = false) {
+                    if (body == 'false') {
 
                         return res.json({
                             speech: 'No allplay device have been selected!',
