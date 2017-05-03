@@ -257,6 +257,52 @@ restService.post('/webhook', function(req, res) {
                     }
                 })
             break;
+        case 'increaseVolumeBy':
+
+            return request.post({ url: 'http://vps341573.ovh.net:5050/increasevolume', form: { key: false, nb: req.body.result.parameters.number } }).then(
+                function(body) {
+                    console.log(body)
+
+                    if (body == "ok") {
+
+                        return res.json({
+                            speech: 'ok',
+                            source: 'webhook-echo-one',
+
+                        });
+
+                    } else {
+                        return res.json({
+                            speech: 'I have no allplay device selected.   ',
+                            source: 'webhook-echo-one',
+
+                        });
+                    }
+                })
+            break;
+        case 'decreaseVolumeBy':
+
+            return request.post({ url: 'http://vps341573.ovh.net:5050/decreasevolume', form: { key: false, nb: req.body.result.parameters.number } }).then(
+                function(body) {
+                    console.log(body)
+
+                    if (body == "ok") {
+
+                        return res.json({
+                            speech: 'ok',
+                            source: 'webhook-echo-one',
+
+                        });
+
+                    } else {
+                        return res.json({
+                            speech: 'I have no allplay device selected.   ',
+                            source: 'webhook-echo-one',
+
+                        });
+                    }
+                })
+            break;
         case 'anyone':
 
             return request.post({ url: 'http://vps341573.ovh.net:5050/linktoanyone', form: { key: 'anyone' } }).then(
