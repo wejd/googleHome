@@ -489,7 +489,7 @@ restService.post('/webhook', function(req, res) {
 
         case 'no':
             return res.json({
-                speech: '',
+                speech: ' Ok! ',
                 source: 'webhook-echo-one',
 
             });
