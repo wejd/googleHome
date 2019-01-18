@@ -4,7 +4,7 @@
     "description": "this is a webhook server ",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "mocha test.js",
         "start": "node index.js"
     },
     "author": "",
@@ -14,6 +14,7 @@
         "express": "^4.15.2",
         "request": "^2.81.0",
         "request-promise": "^4.2.0"
+        "mocha": "latest"
     }
 
 }
